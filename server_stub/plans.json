@@ -1,0 +1,16 @@
+[
+    {
+        "id": "1",
+        "name": "My weekend plan",
+        "startDate": "21-04-2018",
+        "endDate": "23-06-2018",
+        "status": "NEW"
+    },
+    {
+        "id": "2",
+        "name": "My weekend plan 2",
+        "startDate": "28-04-2018",
+        "endDate": "30-06-2018",
+        "status": "NEW"
+    }
+]
