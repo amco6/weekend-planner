@@ -1,0 +1,29 @@
+<div>
+    <ng-container *ngIf="plans && plans.length > 0">
+        <table>
+            <thead>
+                <tr>
+                    <th>Plan name</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Users</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let plan of plans">
+                    <td><a href="javascript:void(0)" routerLink="/view/{{plan.id}}">{{plan.name}}</a></td>
+                    <td>{{plan.startDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{plan.endDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{plan.users | listArray: 'userName'}} </td>
+                    <td>{{plan.status | getLabel: weekendPlanStatusStrings}}</td>
+                    <td><a *ngIf="plan.status !== 'FINISHED'" href="javascript:void(0)" routerLink="/edit/{{plan.id}}">Edit plan</a></td>
+                    <td><a *ngIf="plan.status === 'IN_PROGRESS'" href="javascript:void(0)" (click)="completePlan(plan.id)">Complete plan</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+    <button routerLink="/create">Create new plan</button>
+</div>

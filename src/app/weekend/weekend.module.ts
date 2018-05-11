@@ -1,15 +1,41 @@
-import { WeekendDateUtils } from './services/weekendDateUtils';
-import { WeekendDate } from './pipes/weekend.pipe';
-import { WeekendComponent } from './weekend/weekend.component';
-import { PlanService } from './services/plan/plan.service';
+import { ListArray } from './shared/pipes/listArray.pipe';
+import { ListWeekends } from './shared/pipes/listWeekends.pipe';
+import { PlanComponent } from './shared/plan/plan.component';
+import { GetLabel } from './shared/pipes/getLabel.pipe';
+import { EditWeekendPlanComponent } from './edit/edit-plan.component';
+import { WeekendDateUtils } from './shared/services/weekendDateUtils';
+import { WeekendDate } from './shared/pipes/weekend.pipe';
+import { WeekendPlansComponent } from './plans/weekend-plans.component';
+import { PlanService } from './shared/services/plan/plan.service';
 import { CreateWeekendPlanComponent } from './create/create-plan.component';
 import { ViewWeekendPlanComponent } from './view/view-plan.component';
-import { EnvironmentService } from './services/environment/environment.service';
+import { EnvironmentService } from './shared/services/environment/environment.service';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+const pipes: any[] = [
+    WeekendDate,
+    GetLabel,
+    ListWeekends,
+    ListArray
+];
+
+const services: any[] = [
+    EnvironmentService,
+    PlanService,
+    WeekendDateUtils
+];
+
+const components: any[] = [
+    PlanComponent,
+    EditWeekendPlanComponent,
+    ViewWeekendPlanComponent,
+    CreateWeekendPlanComponent,
+    WeekendPlansComponent
+];
 
 @NgModule({
     imports: [
@@ -20,13 +46,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         RouterModule
     ],
     exports: [
-        ViewWeekendPlanComponent, CreateWeekendPlanComponent, WeekendComponent, WeekendDate
+        components.concat(pipes)
     ],
     declarations: [
-        ViewWeekendPlanComponent, CreateWeekendPlanComponent, WeekendComponent, WeekendDate
+        components.concat(pipes)
     ],
     providers: [
-        EnvironmentService, PlanService, WeekendDate, WeekendDateUtils
+        services.concat(pipes)
     ]
 })
 export class WeekendModule { }

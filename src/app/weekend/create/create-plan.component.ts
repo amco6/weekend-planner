@@ -1,56 +1,50 @@
-import { WeekendDateUtils } from './../services/weekendDateUtils';
-import { UserData } from './../model/user-data.model';
-import { PlanService } from './../services/plan/plan.service';
+import { Weekend } from './../shared/model/weekend.model';
+import { WeekendDateUtils } from './../shared/services/weekendDateUtils';
+import { UserData } from './../shared/model/user-data.model';
+import { PlanService } from './../shared/services/plan/plan.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
+/**
+ * Create weekend plan component.
+ *
+ * @export
+ * @class CreateWeekendPlanComponent
+ * @implements {OnInit}
+ */
 @Component({
     selector: 'app-create',
     templateUrl: './create-plan.component.html',
-    styleUrls: ['./../../app.component.css']
+    styleUrls: ['./../../app.component.scss']
 })
 export class CreateWeekendPlanComponent implements OnInit {
 
     planForm: FormGroup;
-    users: number[] = [];
     startWeekends: moment.Moment[];
     endWeekends: moment.Moment[];
+    heading = 'Create a new weekend plan';
+    hint = 'Please put in the start weekend and end weekend...';
 
     constructor(
         private formBuilder: FormBuilder,
-        private planService: PlanService
+        private planService: PlanService,
+        private router: Router
     ) { }
 
+    /**
+     * Create the plan form and get the weekend dates.
+     *
+     * @memberof CreateWeekendPlanComponent
+     */
     ngOnInit() {
+        this.startWeekends = WeekendDateUtils.getSaturdays(52);
+        this.endWeekends = WeekendDateUtils.getSaturdays(52);
         this.planForm = this.formBuilder.group({
             name: ['', Validators.required],
             startDate: ['', Validators.required],
-            endDate: ['', Validators.required],
-            numberOfUsers: ['', Validators.required],
-            completeByDate: new FormControl(),
-            completeByUsers: new FormControl(),
-            user0: new FormControl('User 1')
+            endDate: ['', Validators.required]
         });
-        this.users.push(0);
-        this.startWeekends = WeekendDateUtils.getSaturdays(51);
-        this.endWeekends = WeekendDateUtils.getSaturdays(51);
-    }
-
-    addUser() {
-        const userId = Math.max.apply(null, this.users) + 1;
-        this.users.push(userId);
-        this.planForm.addControl(`user${userId}`, new FormControl(`User ${userId + 1}`));
-    }
-
-    removeUser(id) {
-        this.users = this.users.filter(u => u !== id);
-        this.planForm.removeControl(`user${id}`);
-    }
-
-    createEndDates() {
-        if (this.planForm && this.planForm.controls['startDate'] && this.planForm.controls['startDate'].value) {
-            this.endWeekends = WeekendDateUtils.getSaturdays(51, this.planForm.controls['startDate'].value);
-        }
     }
 }

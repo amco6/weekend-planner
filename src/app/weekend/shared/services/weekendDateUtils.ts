@@ -22,17 +22,24 @@ export class WeekendDateUtils {
         return saturday;
     }
 
-    // TODO
+    // TODO: check this works
     public static getSaturdays(amount: number, startDate?: string): moment.Moment[] {
         const saturday = startDate ? moment(startDate) : this.getFirstSaturday();
-        const saturdays = [saturday];
+        const saturdays = [];
 
         for (let i = 0; i < amount; i++) {
-            const nextSat = moment(saturday).add(1, 'weeks');
-            saturdays.push(moment(nextSat));
+            saturdays.push(moment(saturday).add(1 * i, 'weeks'));
         }
-        saturdays.forEach(s => console.log(moment(s).format('DD-MM-YYYY')));
+        // saturdays.forEach(s => console.log(moment(s).format('DD-MM-YYYY')));
         return saturdays;
+    }
+
+    public static getWeekendsBetweenDates(startDate: string, endDate: string, inclusive = false): moment.Moment[] {
+        let c = moment(endDate).diff(moment(startDate), 'weeks');
+        if (inclusive) {
+            c = c++;
+        }
+        return this.getSaturdays(c, startDate);
     }
 
 

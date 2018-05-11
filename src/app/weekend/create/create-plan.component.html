@@ -1,30 +1,4 @@
 <div>
-    <h1>Create a new weekend plan</h1>
-    <form [formGroup]="planForm">
-        <div class="form-group">
-            <label>Name: </label>
-            <input type="text" formControlName="name">
-        </div>
-        <div class="form-group">
-            <label>Start: </label>
-            <select formControlName="startDate" (click)="createEndDates()">
-                <option *ngFor="let d of startWeekends" [value]="d">{{d | weekendDate}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>End: </label>
-            <select formControlName="endDate">
-                <option *ngFor="let d of endWeekends" [value]="d">{{d | weekendDate}}</option>
-            </select>
-        </div>
-
-        <ng-container *ngFor="let u of users">
-            <div class="form-group">
-                <label>User: </label>
-                <input type="text" formControlName="user{{u}}">
-                <button *ngIf="u !== 0" (click)="removeUser(u)">Remove user</button>
-            </div>
-        </ng-container>
-        <button (click)="addUser()">Add user</button>
-    </form>
+    <app-plan [heading]="heading" [hint]="hint" [planForm]="planForm" [startWeekends]="startWeekends" [endWeekends]="endWeekends"
+        [saveButton]="true"></app-plan>
 </div>

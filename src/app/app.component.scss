@@ -1,0 +1,227 @@
+$font-stack: Helvetica, Sans-serif;
+$primary-color: MidnightBlue;
+
+h1, h2, h3, p, th, td, button, label, input, select, option {
+    font-family: $font-stack;
+    // color: $primary-color;
+}
+
+ p, th, td, button, label, input, select, option {
+    font-size: 18px; 
+}
+
+a {
+    color: #008CBA;
+}
+
+.hint {
+    color: grey;
+    margin-bottom: 30px;
+}
+
+th, td {
+    padding: 0 15px 15px 0px;
+    text-align: left;
+    white-space: pre;
+    vertical-align: top;
+    border-bottom: 1px solid #ddd;
+    padding-top: 10px;
+
+}
+button {
+    background-color: #008CBA; 
+    font-weight: bold;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    border-color: #008CBA;
+    margin-top: 25px;    
+}
+
+form {
+    display: block;
+}
+
+label {
+    display: block;    
+}
+
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+    border: 2px solid red;
+}
+
+input[type=text], input[type=number], select {
+    width: 350px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: DimGrey;    
+}
+
+option {
+    text-align: left;
+    bottom: 100%;
+    color: DimGrey;
+}
+
+ .user-table {
+     margin-top: 15px;
+    // th { color: DimGrey; }
+ }
+
+ /* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+     &.visible {
+        //Animation lasts 1 second but has a negative 0.5 second delay to ensure it has started
+        //by the time the element is visible on screen
+        animation: fadeIn 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) -0.5s forwards;
+
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .modal-dialog {
+            animation: moveUp .5s cubic-bezier(0.165, 0.840, 0s.440, 1.000) forwards;
+        }
+    }
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; 
+    // overflow-y: auto;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    top: 0;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.user-form {
+    input, select {
+        width: 60%;
+    }
+}
+
+
+
+
+
+
+
+
+// /* Customize the label (the container) */
+// .container {
+//   display: block;
+//   position: relative;
+//   padding-left: 35px;
+//   margin-bottom: 12px;
+//   cursor: pointer;
+//   font-size: 22px;
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   -ms-user-select: none;
+//   user-select: none;
+// }
+
+// /* Hide the browser's default checkbox */
+// .container input {
+//   position: absolute;
+//   opacity: 0;
+//   cursor: pointer;
+// }
+
+// /* Create a custom checkbox */
+// .checkmark {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   height: 25px;
+//   width: 25px;
+//   background-color: #ccc;
+// }
+
+// /* When the checkbox is checked, add a blue background */
+// .container input:checked ~ .checkmark {
+//   background-color: #2196F3;
+// }
+
+// /* When the checkbox is disabled, add a lighter grey background */
+// .container input:disabled ~ .checkmark {
+//   background-color: #eee;
+// }
+
+// /* Create the checkmark/indicator (hidden when not checked) */
+// .checkmark:after {
+//   content: "";
+//   position: absolute;
+//   display: none;
+// }
+
+// /* Show the checkmark when checked */
+// .container input:checked ~ .checkmark:after {
+//   display: block;
+// }
+
+// /* Style the checkmark/indicator */
+// .container .checkmark:after {
+//   left: 9px;
+//   top: 5px;
+//   width: 5px;
+//   height: 10px;
+//   border: solid white;
+//   border-width: 0 3px 3px 0;
+//   -webkit-transform: rotate(45deg);
+//   -ms-transform: rotate(45deg);
+//   transform: rotate(45deg);
+// }

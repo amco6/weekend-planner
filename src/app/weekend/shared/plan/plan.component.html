@@ -1,0 +1,96 @@
+<div>
+    <h2 *ngIf="heading">{{heading}}</h2>
+    <p *ngIf="hint" class="hint">{{hint}}</p>
+    <form *ngIf="planForm" [formGroup]="planForm">
+        <label>Plan name</label>
+        <input type="text" formControlName="name" maxlength="25">
+        <label>Start weekend</label>
+        <select formControlName="startDate" (click)="createEndDates()">
+                <option *ngFor="let d of startWeekends" [value]="d">{{d | weekendDate}}</option>
+            </select>
+        <label>End weekend</label>
+        <select formControlName="endDate">
+                <option *ngFor="let d of endWeekends" [value]="d">{{d | weekendDate}}</option>
+            </select>
+    </form>
+    <ng-container *ngIf="plan && !edit">
+        <h3>Plan name: </h3>
+        <p>{{plan.name}}</p>
+        <h3>Start date:</h3>
+        <p>{{plan.startDate | weekendDate}}</p>
+        <h3>End date: </h3>
+        <p>{{plan.endDate | weekendDate}}</p>
+        <h3>Plan status: </h3>
+        <p>{{plan.status | getLabel: weekendPlanStatusStrings}}</p>
+    </ng-container>
+    <ng-container *ngIf="edit || users">
+        <h3>Users: </h3>
+        <table class="user-table" *ngIf="users?.length > 0">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Busy weekends</th>
+                    <th>Possible busy weekends</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user.userName}}</td>
+                    <td>{{!user.busyWeekends ? 'No weekends busy' : user.busyWeekends | listWeekends}}</td>
+                    <td>{{!user.unsureWeekends ? 'No weekends possibly busy' : user.unsureWeekends | listWeekends}}</td>
+                    <td><a *ngIf="saveButton" href="javascript:void(0)" (click)="removeUser(user)">Remove user</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <p><a *ngIf="saveButton" href="javascript:void(0)" (click)="openModal()">Add new user</a></p>
+    </ng-container>
+
+
+    <!-- The Modal -->
+    <div *ngIf="showModal" id="myModal" class="modal visible">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <h2>Add user</h2>
+
+            <!-- <form class="user-form" *ngIf="newUserForm" [formGroup]="newUserForm"> -->
+            <label>User name</label>
+            <input type="text" [(ngModel)]="userName" maxlength="25">
+
+            <table class="user-table modal-input" *ngIf="weekends && weekends.length > 0">
+                <thead>
+                    <tr>
+                        <th>Weekend</th>
+                        <th>Busy</th>
+                        <th>Possibly busy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let w of weekends">
+                        <td><a>{{w | weekendDate}}</a></td>
+                        <td>
+                            <!-- <label class="container"> -->
+                            <input type="checkbox" (click)="addBusyWeekend(w)" [disabled]="disableBusyWeekend(w)">
+                            <!-- <span class="checkmark"></span> -->
+                            <!-- </label> -->
+                        </td>
+                        <td>
+                            <!-- <label class="container"> -->
+                            <input type="checkbox" (click)="addUnsureWeekend(w)" [disabled]="disableUnsureWeekend(w)">
+                            <!-- <span class="checkmark"></span> -->
+                            <!-- </label> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- </form> -->
+            <span><a class="close"(click)="closeModal()">&times;</a></span>
+            <button (click)="closeModal()">Cancel</button>
+            <button (click)="addUser()">Add user</button>
+        </div>
+    </div>
+
+    <button routerLink="/">{{saveButton ? 'Cancel' : 'Back'}}</button>
+    <button *ngIf="saveButton" (click)="savePlan()">Save plan</button>
+</div>

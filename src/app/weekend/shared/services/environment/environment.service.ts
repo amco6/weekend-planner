@@ -24,8 +24,7 @@ export class EnvironmentService {
     }
 
     /**
-     * @description Exposes the environment variables (synchronously) for use in components.
-     * Note: That this should only be called once the environment variables catalogue have been loaded.
+     * Exposes the environment variables (synchronously) for use in components.
      *
      * @returns {EnvironmentVariables}
      */
